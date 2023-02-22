@@ -1,0 +1,93 @@
+﻿@model HotMusic.Models.Music
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 style ="margin-left: 30px; color: white;">Thông tin chi tiết bài hát</h1>
+
+<div>
+    <hr />
+    <div class="col-10" style="padding: 25px;">
+            <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Thông tin bai hat : @Model.MusiceName</h4>
+                <div class="table-responsive">
+                    <table class="product-info-table m-t-20">
+                        <tbody>
+                            <tr>
+                                <td>ID:</td>
+                                <td class="text-dark font-weight-semibold">@Model.Id</td>
+                            </tr>
+                            <tr>
+                                <td>Tên bai hat:</td>
+                                <td>@Model.MusiceName</td>
+                            </tr>
+                            <tr>
+                                <td>Tac gia:</td>
+                                <td>@Model.Author.AuthorName</td>
+                            </tr>
+                            <tr>
+                                <td>URL:@Model.Url</td>
+                                <td>
+                                    <audio id="music" autoplay="false" controls width="450" height="450">
+                                        <source src="~/assets/mp3/@Model.Url" type="audio/mp3">
+                                    </audio>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Số lượt nghe:</td>
+                                <td>@Model.ListenQuantity</td>
+                            </tr>
+                            <tr>
+                                <td>Số lượt Download:</td>
+                                <td>@Model.DownloadQuantity</td>
+                            </tr>
+                            <tr>
+                                <td>Số lượt Thích:</td>
+                                <td>@Model.FavoriteQuantity</td>
+                            </tr>
+                            <tr>
+                                <td>Vip:</td>
+                                <td>
+                                    @if (Model.IsVip == true)
+                                    {
+                                        <div class="switch m-r-10">
+                                            <input type="checkbox" id="switch-1" checked="" disabled />
+                                            <label for="switch-1"></label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="switch m-r-10">
+                                            <input type="checkbox" id="switch-1" disabled />
+                                            <label for="switch-1"></label>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ảnh đại diện:</td>
+                                <td>
+                                    <img width="200" height="200" src="~/images/BaiHat/@Model.Image" alt="@Model.MusiceName" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả sản phẩm:</td>
+                                <td>@Html.Raw(Model.Description)</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Chỉnh sửa</a> |
+                <a class="btn btn-outline-danger" asp-action="Index">Quay lại</a>
+            </div>
+            </div>
+        </div>
+</div>
+
+

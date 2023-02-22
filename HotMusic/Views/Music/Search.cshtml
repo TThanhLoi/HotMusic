@@ -1,0 +1,24 @@
+﻿@model List<HotMusic.Models.Music>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kết Quả Tìm Kiếm</h1>
+
+					@foreach (var item in Model)
+					{
+    <div class="col-sm-3 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <a href=""><img src="~/images/BaiHat/@item.Image" width="230px" height="230px" alt="" style="border-radius: 20px 20px 20px 20px"></a>
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        @Html.ActionLink(item.MusiceName, "Details", "Music", new { @Id = item.Id }, null)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+					}
+

@@ -1,0 +1,70 @@
+﻿@model HotMusic.Models.Album
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 style="margin-left: 30px; color: white;">Thông tin chi tiết Album</h1>
+
+<div>
+    <hr />
+    <div class="col-10" style="padding: 25px;">
+        <div  class="card mb-4" style="padding: 25px;">
+            <div class="card-body">
+                <h4 class="card-title">Thông tin Album : @Model.Name</h4>
+                <div class="table-responsive">
+                    <table class="product-info-table m-t-20">
+                        <tbody>
+                            <tr>
+                                <td>ID:</td>
+                                <td class="text-dark font-weight-semibold">@Model.Id</td>
+                            </tr>
+                            <tr>
+                                <td>Tên Album:</td>
+                                <td>@Model.Name</td>
+                            </tr>
+                            <tr>
+                                <td>The loai:</td>
+                                <td>@Model.Category.CategoryName</td>
+                            </tr>
+                            <tr>
+                                <td>URL:</td>
+                                <td>@Model.Url</td>
+                                @*<td>
+                                    <audio id="music" autoplay="false" controls width="450" height="450">
+                                        <source src="~/assets/mp3/@Model.Url" type="audio/mp3">
+                                    </audio>
+                                </td>*@
+                            </tr>
+                            <tr>
+                                <td>Ngay tao Album:</td>
+                                <td>@Model.Createdate</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Số lượt Thích:</td>
+                                <td>@Model.FavoriteQuantity</td>
+                            </tr>
+                            <tr>
+                                <td>Ảnh đại diện:</td>
+                                <td>
+                                    <img width="200" height="200" src="~/images/Album/@Model.Imange" alt="@Model.Imange" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả sản phẩm:</td>
+                                <td>@Html.Raw(Model.Description)</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Chỉnh sửa</a> |
+                <a class="btn btn-danger" asp-action="Index">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>

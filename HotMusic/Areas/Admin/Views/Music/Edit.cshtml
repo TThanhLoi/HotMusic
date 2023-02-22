@@ -1,0 +1,99 @@
+﻿@model HotMusic.Models.Music
+
+@{
+    ViewData["Title"] = "Chinh Sua Bai Hat" + Model.MusiceName; 
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Adminassets/summernote/summernote-bs4.css" rel="stylesheet" />
+    <link href="~/Adminassets/summernote/summernote.css" rel="stylesheet" />
+}
+    <h1 style="margin-left: 30px; color: white;">Chỉnh Sửa Bài Hát</h1>
+<hr />
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-10">
+            <div class="card mb-4" style="padding: 25px;">
+        <form asp-controller="Music" asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Image"/>
+            <div class="form-group">
+                <img src="~/images/BaiHat/@Model.Image" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MusiceName" class="control-label"></label>
+                <input asp-for="MusiceName" class="form-control" />
+                <span asp-validation-for="MusiceName" class="text-danger"></span>
+            </div>
+            <div class="form-group"> 
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" name="fImgae" type="file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorId" class="control-label"></label>
+                        <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId">
+                            <option value="0" disabled selected>
+                                Chon Tac gia bai Hat
+                            </option>
+                        </select>
+                <span asp-validation-for="AuthorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Url" class="control-label"></label>
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ListenQuantity" class="control-label"></label>
+                <input asp-for="ListenQuantity" class="form-control" />
+                <span asp-validation-for="ListenQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DownloadQuantity" class="control-label"></label>
+                <input asp-for="DownloadQuantity" class="form-control" />
+                <span asp-validation-for="DownloadQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavoriteQuantity" class="control-label"></label>
+                <input asp-for="FavoriteQuantity" class="form-control" />
+                <span asp-validation-for="FavoriteQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsVip" class="control-label"></label>
+                <input asp-for="IsVip" type="checkbox   " />
+                <span asp-validation-for="IsVip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea class="summernote" asp-for="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Luu Thay Doi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    </div>
+        <div>
+            <button class="btn btn-outline-danger"><a asp-action="Index">Back to List</a></button>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="~/Adminassets/summernote/summernote-bs4.js"></script>
+    <script>jQuery(document).ready(function () {
+            $('.summernote').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+                styleTags: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
+                height: 200,
+                minHeight: null,
+                maxHeight: null,
+                focus: true
+            });
+        });</script>
+}
+

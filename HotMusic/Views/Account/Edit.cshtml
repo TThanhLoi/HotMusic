@@ -1,0 +1,74 @@
+﻿@model HotMusic.Models.Account
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Sửa Tài Khoản</h1>
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Password">
+    <input type="hidden" asp-for="Role"/>
+    <input type="hidden" asp-for="IdVip" />
+    <input type="hidden" asp-for="StartTime" />
+    <input type="hidden" asp-for="EndTime" />
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0">Edit Profile</p>
+                        <input class="btn btn-primary btn-sm ms-auto" type="submit" value="Save">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="text-uppercase text-sm">User Information</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                    <label asp-for="UserName" class="control-label"></label>
+                                    <input asp-for="UserName" class="form-control" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                    <label asp-for="FullName" class="control-label"></label>
+                                    <input asp-for="FullName" class="form-control" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="horizontal dark">
+                    <p class="text-uppercase text-sm">Contact Information</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                    <label asp-for="Address" class="control-label"></label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                    <label asp-for="Phone" class="control-label"></label>
+                                    <input asp-for="Phone" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

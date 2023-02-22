@@ -1,0 +1,212 @@
+﻿@model HotMusic.Models.Music
+
+@{
+    ViewData["Title"] = Model.MusiceName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Music> baihatlienquan = ViewBag.baihatlienquan;
+    HotMusic.Models.Comment Createcmt = new HotMusic.Models.Comment(); 
+}
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0" style="border: 2px solid #fff; border-radius: 20px 20px 20px 20px;">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row d-flex align-items-center justify-content-center h-100">
+                        <div id="show">
+                        <div  id="musicDisc">
+                            <img id="showI" src="~/images/BaiHat/@Model.Image"/>
+                        </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">@Model.MusiceName</h1>
+                                </div>
+                                <div class="flex-grow">
+                                    @*@Html.ActionLink(Model.MusiceName, "Details", "Music", new { @Id = Model.Id }, null)*@
+                                    <h3>@Model.MusiceName</h3>
+                                    <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                                        <div class="icon-music" style="font-size:20px;">
+                                            @Model.DownloadQuantity
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <a href="#">
+                                                    <i class="mdi mdi-download"></i>
+                                                </a>
+                                                @Model.FavoriteQuantity
+                                                <a href="#">
+                                                    <i class="mdi mdi-heart"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-action="DangNhap" asp-controller="Account">
+                                                    <i class="mdi mdi-download"></i>
+                                                </a>
+                                                @Model.FavoriteQuantity
+                                                <a asp-action="DangNhap" asp-controller="Account">
+                                                    <i class="mdi mdi-heart"></i>
+                                                </a>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div>
+                                    <audio id="music" preload="auto" autoplay="true" loop="false" controls width="450" height="450">
+                                        <source src="~/assets/mp3/@Model.Url" type="audio/mp3">
+                                    </audio>
+                                </div>
+
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0" style="border: 2px solid #fff; border-radius: 20px 20px 20px 20px;">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row d-flex align-items-center justify-content-center h-100">
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-lg-start">
+                                    <h1 class="h4 text-gray-900 mb-4">Lời bài hát: @Model.MusiceName</h1>
+                                    <h2 class="h4 text-gray-500 mb-4">Nhạc sĩ:@Model.Author.AuthorName</h2>
+                                </div>
+                                <hr />
+                                <div class="flex-grow">
+                                    @Model.Description
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0" style="border: 2px solid #fff; border-radius: 20px 20px 20px 20px;">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row d-flex align-items-center justify-content-center h-100">
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-lg-start">
+                                    <h1 class="h4 text-gray-900 mb-4">Bình Luận:</h1>
+                                </div>
+                                <div class="col-md-8">
+                                    <form asp-controller="Music" asp-action="Createcmt" asp-route-id="@Model.Id" method="post" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                                    @await Html.PartialAsync("_CreatecmtPartialView",Createcmt)
+                                    </form>
+                                </div>
+                                <hr />
+                                <div class="preview-list">
+                                     @if (Model != null && Model.Comments.Count() > 0)
+                                    {
+                                        @foreach (var item in Model.Comments)
+                                        {
+
+                                            <div class="preview-item border-bottom">
+                                                <div class="preview-thumbnail">
+                                                    <div class="preview-icon bg-primary">
+                                                        <a href=""><img src="~/images/account/default.png" alt=""></a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="preview-item-content d-sm-flex flex-grow">
+                                                    <div class="flex-grow">
+                                                        <h2>@item.AccountId</h2>
+                                                    </div>
+                                                    <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                                                        <div class="icon-music" style="font-size:20px;">
+                                                            @item.Comment1
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }else{
+                                        <div>Chua co binh luan nao!!!</div>
+                                    }
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card-body">
+            <div class="d-flex flex-row justify-content-between">
+                <h4 class="card-title mb-1">Có Thể Bạn Muốn Nghe?</h4>
+            </div>
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="preview-list">
+                        @if (baihatlienquan != null && baihatlienquan.Count() > 0)
+                        {
+                            @foreach (var item in baihatlienquan)
+                            {
+                                <div class="preview-item border-bottom">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-primary">
+                                            <a href=""><img src="~/images/BaiHat/@item.Image" alt=""></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="preview-item-content d-sm-flex flex-grow">
+                                        <div class="flex-grow">
+                                            <a asp-action="Details" asp-controller="Music" asp-route-id="@item.Id">@item.MusiceName</a>
+                                            @* <p class="text-muted mb-0">@item.ListenQuantity</p>*@
+                                        </div>
+                                        <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                                            <div class="icon-music" style="font-size:20px;">
+                                                <a href="">
+                                                    <i class="mdi mdi-download"></i>
+                                                </a>
+                                                <a href="">
+                                                    <i class="mdi mdi-arrow-right-drop-circle"></i>
+                                                </a>
+                                                <a href="">
+                                                    <i class="mdi mdi-cloud"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+         

@@ -1,0 +1,34 @@
+﻿@model HotMusic.Models.Category
+
+@{
+    ViewData["Title"] = "Chinh Sua Bai Hat" + Model.CategoryName;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 style="margin-left: 30px; color: white;">Chỉnh Sửa Danh Mục Bài Hát</h1>
+<hr />
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-10">
+            <div class="card mb-4" style="padding: 25px;">
+                <form asp-controller="Category" asp-action="Edit" asp-route-id="@Model.Id" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="form-group">
+                        <label asp-for="CategoryName" class="control-label"></label>
+                        <input asp-for="CategoryName" class="form-control" />
+                        <span asp-validation-for="CategoryName" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="submit" value="Luu Thay Doi" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-outline-danger"><a asp-action="Index">Back to List</a></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model HotMusic.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Thể loại nhạc : @Model.CategoryName</h1>
+
+<div class="row">
+    @foreach (var item in Model.Albums)
+    {
+        <div class="col-sm-3 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <a href=""><img src="~/images/Album/@item.Imange" width="230px" height="230px" alt=""></a>
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            @Html.ActionLink(item.Name, "Details", "Album", new { @Id = item.Id }, null)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
